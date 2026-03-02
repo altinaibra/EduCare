@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+import "./App.css";
 import Home from "./pages/Home";
 import KindergartenDetails from "./pages/Details";
 import RegisterChild from "./pages/RegisterChild";
@@ -7,19 +8,38 @@ import ChildrenList from "./pages/ChildrenList";
 function App() {
   return (
     <Router>
-      <nav style={{ padding: "10px", background: "#f5f5f5" }}>
-        <Link to="/" style={{ marginRight: 10 }}>Home</Link>
-        <Link to="/details" style={{ marginRight: 10 }}>Detajet</Link>
-        <Link to="/register" style={{ marginRight: 10 }}>Regjistro</Link>
-        <Link to="/children">Lista</Link>
-      </nav>
+      <div className="app-shell">
+        <header className="top-nav-wrap">
+          <nav className="top-nav">
+            <NavLink to="/" className="brand">
+              EduCare
+            </NavLink>
+            <div className="nav-links">
+              <NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+                Home
+              </NavLink>
+              <NavLink to="/details" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+                Detajet
+              </NavLink>
+              <NavLink to="/register" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+                Regjistro
+              </NavLink>
+              <NavLink to="/children" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
+                Lista
+              </NavLink>
+            </div>
+          </nav>
+        </header>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/details" element={<KindergartenDetails />} />
-        <Route path="/register" element={<RegisterChild />} />
-        <Route path="/children" element={<ChildrenList />} />
-      </Routes>
+        <main className="page-wrap">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/details" element={<KindergartenDetails />} />
+            <Route path="/register" element={<RegisterChild />} />
+            <Route path="/children" element={<ChildrenList />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   );
 }

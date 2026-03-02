@@ -10,54 +10,79 @@ const RegisterChild = () => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChild({ ...child, [e.target.name]: e.target.value });
+    const { name, value, type } = e.target;
+
+    setChild((previous) => ({
+      ...previous,
+      [name]: type === "number" ? Number(value) : value
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const existing = JSON.parse(localStorage.getItem("children") || "[]");
-    child.id = Date.now();
+    const newChild: Child = {
+      ...child,
+      id: Date.now()
+    };
 
-    localStorage.setItem(
-      "children",
-      JSON.stringify([...existing, child])
-    );
+    localStorage.setItem("children", JSON.stringify([...existing, newChild]));
 
-    alert("Fëmija u regjistrua me sukses ✅");
+    alert("Femija u regjistrua me sukses.");
+
+    setChild({
+      id: 0,
+      fullName: "",
+      age: 0,
+      parentName: ""
+    });
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Regjistro Fëmijë</h2>
-      <form onSubmit={handleSubmit}>
+    <section className="page-card form-card">
+      <h2 className="page-title">Regjistro Femije</h2>
+      <p className="page-subtitle">Ploteso te dhenat me poshte per regjistrim te shpejte.</p>
+
+      <form onSubmit={handleSubmit} className="kid-form">
+        <label htmlFor="fullName">Emri i plote</label>
         <input
+          id="fullName"
           type="text"
           name="fullName"
-          placeholder="Emri i plotë"
+          placeholder="p.sh. Ardit Krasniqi"
+          value={child.fullName}
           onChange={handleChange}
           required
         />
-        <br /><br />
+
+        <label htmlFor="age">Mosha</label>
         <input
+          id="age"
           type="number"
           name="age"
-          placeholder="Mosha"
+          min={1}
+          max={10}
+          placeholder="p.sh. 4"
+          value={child.age || ""}
           onChange={handleChange}
           required
         />
-        <br /><br />
+
+        <label htmlFor="parentName">Emri i prindit</label>
         <input
+          id="parentName"
           type="text"
           name="parentName"
-          placeholder="Emri i prindit"
+          placeholder="p.sh. Linda Krasniqi"
+          value={child.parentName}
           onChange={handleChange}
           required
         />
-        <br /><br />
+
         <button type="submit">Regjistro</button>
       </form>
-    </div>
+    </section>
   );
 };
 

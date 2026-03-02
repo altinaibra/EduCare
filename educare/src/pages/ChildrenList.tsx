@@ -10,21 +10,24 @@ const ChildrenList = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Lista e Fëmijëve të Regjistruar</h2>
+    <section className="page-card">
+      <h2 className="page-title">Lista e Femijeve</h2>
+      <p className="page-subtitle">Te gjithe femijet e regjistruar ne EduCare.</p>
 
       {children.length === 0 ? (
-        <p>Nuk ka fëmijë të regjistruar.</p>
+        <p className="empty-state">Nuk ka femije te regjistruar ende.</p>
       ) : (
-        <ul>
+        <div className="children-grid">
           {children.map((child) => (
-            <li key={child.id}>
-              {child.fullName} - {child.age} vjeç - Prindi: {child.parentName}
-            </li>
+            <article key={child.id} className="child-card">
+              <h3>{child.fullName}</h3>
+              <p>Mosha: {child.age} vjec</p>
+              <p>Prindi: {child.parentName}</p>
+            </article>
           ))}
-        </ul>
+        </div>
       )}
-    </div>
+    </section>
   );
 };
 
