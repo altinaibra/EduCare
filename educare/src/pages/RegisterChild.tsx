@@ -22,9 +22,11 @@ const RegisterChild = () => {
     e.preventDefault();
 
     const existing = JSON.parse(localStorage.getItem("children") || "[]");
-    const newChild: Child = {
+    const newChild = {
       ...child,
-      id: Date.now()
+      id: Date.now(),
+      createdAt: new Date().toISOString(),
+      monthlyFee: 120
     };
 
     localStorage.setItem("children", JSON.stringify([...existing, newChild]));

@@ -33,7 +33,7 @@
 
 .top-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
   align-items: center;
   background: rgba(255, 255, 255, 0.84);
@@ -42,6 +42,27 @@
   padding: 12px 16px;
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(7px);
+}
+
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(160deg, var(--mint-100), var(--pink-100));
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 9px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 2px;
+  background: #2e5e4d;
+  border-radius: 999px;
 }
 
 .brand {
@@ -58,10 +79,48 @@
   padding: 9px 16px;
 }
 
-.nav-links {
-  display: flex;
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 44, 36, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  z-index: 20;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: min(310px, 84vw);
+  height: 100vh;
+  padding: 22px 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fffb 100%);
+  border-right: 2px solid #e6f0eb;
+  box-shadow: 0 14px 34px rgba(29, 63, 52, 0.18);
+  transform: translateX(-102%);
+  transition: transform 0.24s ease;
+  z-index: 30;
+}
+
+.side-menu.open {
+  transform: translateX(0);
+}
+
+.side-menu h3 {
+  margin: 0 0 12px;
+  color: #214739;
+}
+
+.side-links {
+  display: grid;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
 .nav-link {
@@ -147,6 +206,7 @@
 .feature-card,
 .detail-item,
 .child-card {
+  text-align: left;
   border-radius: 20px;
   background: linear-gradient(180deg, #ffffff 0%, #fbfffc 100%);
   border: 1px solid #e4f2eb;
@@ -243,18 +303,133 @@
   background: #f8fffb;
 }
 
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.report-summary article {
+  border-radius: 16px;
+  border: 1px solid #d8ebdf;
+  background: #fbfffd;
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.report-summary span {
+  font-size: 0.9rem;
+  color: #5a7a6d;
+}
+
+.report-summary strong {
+  color: #1d4336;
+}
+
+.search-wrap {
+  margin-bottom: 16px;
+}
+
+.search-wrap input {
+  width: 100%;
+  border: 2px solid #d8ece2;
+  border-radius: 14px;
+  padding: 12px 13px;
+  font-size: 1rem;
+  color: #235242;
+  background: #fbfffd;
+  outline: none;
+}
+
+.search-wrap input:focus {
+  border-color: #80d8b2;
+  box-shadow: 0 0 0 4px rgba(128, 216, 178, 0.23);
+}
+
+.report-button {
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 44, 36, 0.38);
+  display: grid;
+  place-items: center;
+  z-index: 40;
+  padding: 14px;
+}
+
+.payment-modal {
+  width: min(700px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 2px solid #e6efe9;
+  box-shadow: 0 20px 42px rgba(14, 38, 31, 0.23);
+  padding: 14px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #213d34;
+}
+
+.modal-header button {
+  border: none;
+  border-radius: 10px;
+  background: #ffe7f2;
+  color: #6d3551;
+  font-weight: 700;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.payment-list {
+  display: grid;
+  gap: 8px;
+}
+
+.payment-item {
+  border-radius: 12px;
+  border: 1px solid #dcece5;
+  padding: 10px 12px;
+  display: grid;
+  gap: 3px;
+}
+
+.payment-item span {
+  color: #2b5648;
+  font-weight: 700;
+}
+
+.payment-item strong {
+  color: #1f4034;
+}
+
+.payment-item small {
+  color: #5e7d72;
+}
+
 @media (max-width: 760px) {
   .app-shell {
     padding: 12px;
   }
 
   .top-nav {
-    border-radius: 24px;
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .nav-links {
-    width: 100%;
+    border-radius: 20px;
   }
 }
