@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
+import "./auth.css";
 import Home from "./pages/Home";
 import KindergartenDetails from "./pages/Details";
 import RegisterChild from "./pages/RegisterChild";
 import ChildrenList from "./pages/ChildrenList";
 import PaymentsReport from "./pages/PaymentsReport";
+import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
 
-const AppLayout = () => {
+type AppLayoutProps = {
+  onLogout: () => void;
+};
+
+const AppLayout = ({ onLogout }: AppLayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -60,6 +67,9 @@ const AppLayout = () => {
           <NavLink to="/payments" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
             Raport Pagesash
           </NavLink>
+          <button type="button" className="logout-btn" onClick={onLogout}>
+            Dil
+          </button>
         </div>
       </aside>
 
@@ -77,9 +87,29 @@ const AppLayout = () => {
 };
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => Boolean(localStorage.getItem("auth_token")));
+
+  const handleLoginSuccess = (token: string) => {
+    localStorage.setItem("auth_token", token);
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("auth_token");
+    setIsAuthenticated(false);
+  };
+
   return (
     <Router>
-      <AppLayout />
+      <Routes>
+        <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        <Route
+          path="/*"
+          element={isAuthenticated ? <AppLayout onLogout={handleLogout} /> : <Navigate to="/login" replace />}
+        />
+      </Routes>
     </Router>
   );
 }
