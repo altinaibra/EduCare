@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Child } from "../types/Child";
 
 const ChildrenList = () => {
+  const { t } = useTranslation();
   const [children, setChildren] = useState<Child[]>([]);
 
   useEffect(() => {
@@ -11,18 +13,22 @@ const ChildrenList = () => {
 
   return (
     <section className="page-card">
-      <h2 className="page-title">Lista e Femijeve</h2>
-      <p className="page-subtitle">Te gjithe femijet e regjistruar ne EduCare.</p>
+      <h2 className="page-title">{t("children.title")}</h2>
+      <p className="page-subtitle">{t("children.subtitle")}</p>
 
       {children.length === 0 ? (
-        <p className="empty-state">Nuk ka femije te regjistruar ende.</p>
+        <p className="empty-state">{t("children.empty")}</p>
       ) : (
         <div className="children-grid">
           {children.map((child) => (
             <article key={child.id} className="child-card">
               <h3>{child.fullName}</h3>
-              <p>Mosha: {child.age} vjec</p>
-              <p>Prindi: {child.parentName}</p>
+              <p>
+                {t("children.age")}: {child.age} {t("children.years")}
+              </p>
+              <p>
+                {t("children.parent")}: {child.parentName}
+              </p>
             </article>
           ))}
         </div>

@@ -2,12 +2,54 @@
   "login": {
     "title": "Kyqu",
     "subtitle": "Hyr me username ose me numer telefoni.",
-    "usernameButton": "Kyqu me Username",
-    "phoneButton": "Kyqu me Nr Telefonit",
+    "usernameButton": "Kyqu me emrin e përdoruesit",
+    "phoneButton": "Kyqu me Numrin e Telefonit",
     "password": "Fjalkalimi",
     "loginButton": "Kyqu",
     "loggingIn": "Duke u kycur...",
     "back": "Kthehu",
-    "forgotPassword": "Ke harruar fjalkalimin?"
+    "forgotPassword": "Ke harruar fjalkalimin?",
+    "countryCode": "Kodi i vendit",
+    "phone": "Numri i telefonit",
+    "username": "Emri i përdoruesit"
+  },
+
+  "auth": {
+    "forgotPassword": "Keni harruar fjalëkalimin?",
+    "enterEmailForCode": "Shkruaj emailin për të marrë kodin e verifikimit.",
+    "email": "Email",
+    "sendCode": "Dërgo kodin",
+    "sending": "Duke dërguar...",
+    "backToLogin": "Kthehu te Login",
+    "verificationCode": "Kodi i verifikimit",
+    "enterCode": "Shkruaj kodin",
+    "newPassword": "Fjalëkalimi i ri",
+    "confirmPassword": "Konfirmo fjalëkalimin",
+    "verifyAndReset": "Verifiko dhe ndrysho fjalëkalimin",
+    "verifying": "Duke verifikuar...",
+    "codeSent": "Kodi u dërgua në email.",
+    "codeSendError": "Dërgimi i kodit dështoi.",
+    "emailRequired": "Email është i detyrueshëm.",
+    "codeRequired": "Kodi është i detyrueshëm.",
+    "newPasswordRequired": "Fjalëkalimi i ri është i detyrueshëm.",
+    "passwordMismatch": "Fjalëkalimet nuk përputhen.",
+    "passwordResetSuccess": "Fjalëkalimi u ndryshua me sukses.",
+    "invalidCode": "Kodi i verifikimit nuk është valid.",
+    "showPassword": "Shfaq fjalëkalimin",
+    "hidePassword": "Fsheh fjalëkalimin",
+    "login": "Login"
+  },
+
+  "children": {
+    "title": "Lista e Fëmijëve",
+    "subtitle": "Të gjithë fëmijët e regjistruar në EduCare.",
+    "empty": "Nuk ka fëmijë të regjistruar ende.",
+    "age": "Mosha",
+    "years": "vjeç",
+    "parent": "Prindi"
+  },
+
+  "common": {
+    "back": "Kthehu"
   }
 }

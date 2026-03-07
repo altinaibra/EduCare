@@ -8,6 +8,48 @@
     "loginButton": "Login",
     "loggingIn": "Logging in...",
     "back": "Back",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "countryCode":"Country Code",
+    "phone": "Phone Number",
+    "username": "Username"
+  },
+
+  "auth": {
+    "forgotPassword": "Forgot Password",
+    "enterEmailForCode": "Enter your email to receive a verification code.",
+    "email": "Email",
+    "sendCode": "Send Code",
+    "sending": "Sending...",
+    "backToLogin": "Back to Login",
+    "verificationCode": "Verification Code",
+    "enterCode": "Enter the code",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "verifyAndReset": "Verify and Reset Password",
+    "verifying": "Verifying...",
+    "codeSent": "Code sent to email.",
+    "codeSendError": "Failed to send code.",
+    "emailRequired": "Email is required.",
+    "codeRequired": "Code is required.",
+    "newPasswordRequired": "New password is required.",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordResetSuccess": "Password changed successfully.",
+    "invalidCode": "Invalid verification code.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "login": "Login"
+  },
+
+  "children": {
+    "title": "Children List",
+    "subtitle": "All children registered in EduCare.",
+    "empty": "No children registered yet.",
+    "age": "Age",
+    "years": "years",
+    "parent": "Parent"
+  },
+
+  "common": {
+    "back": "Back"
   }
 }
