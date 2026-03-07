@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eduCare", "eduCare.csproj", "{3025A0BE-94A4-4644-BB13-4B042F14E479}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eduCareApi", "eduCareApi.csproj", "{3025A0BE-94A4-4644-BB13-4B042F14E479}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
