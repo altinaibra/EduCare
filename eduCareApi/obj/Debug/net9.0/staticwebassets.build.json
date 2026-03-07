@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "wHaVM0amFlNfmS4hrDjNhdHyehvoUaJs62d5W8EIZdQ=",
+  "Source": "eduCareApi",
+  "BasePath": "_content/eduCareApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
