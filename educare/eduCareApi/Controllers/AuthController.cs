@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using eduCareApi.Repository;
 using eduCare.Models;
 
 namespace eduCareApi.Controllers
@@ -8,101 +8,66 @@ namespace eduCareApi.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly AppDbContext _db;
+        private readonly UserRepository _userRepository;
 
-        public AuthController(AppDbContext db)
+        public AuthController(UserRepository userRepository)
         {
-            _db = db;
+            _userRepository = userRepository;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            if (request is null || string.IsNullOrWhiteSpace(request.Password))
+            if (request == null || string.IsNullOrWhiteSpace(request.Password))
+                return BadRequest();
+
+            User? user;
+
+            if (request.LoginType == "telephone")
             {
-                return BadRequest(new { message = "Invalid login request." });
-            }
-
-            var userQuery = _db.Users.AsQueryable();
-
-            if (string.Equals(request.LoginType, "telephone", StringComparison.OrdinalIgnoreCase))
-            {
-                if (string.IsNullOrWhiteSpace(request.Telephone))
-                {
-                    return BadRequest(new { message = "Telephone is required." });
-                }
-
-                userQuery = userQuery.Where(u => u.Telephone == request.Telephone);
+                user = await _userRepository.GetByPhoneAsync(request.Telephone);
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(request.Username))
-                {
-                    return BadRequest(new { message = "Username is required." });
-                }
-
-                userQuery = userQuery.Where(u => u.Username == request.Username);
+                user = await _userRepository.GetByUsernameAsync(request.Username);
             }
 
-            var user = await userQuery.FirstOrDefaultAsync();
-            if (user is null || user.Password != request.Password)
-            {
-                return Unauthorized(new { message = "Invalid credentials." });
-            }
+            if (user == null)
+                return Unauthorized(new { message = "Invalid credentials" });
 
-            // Temporary token placeholder until JWT issuance is wired.
-            const string token = "dev-token";
+
+
 
             return Ok(new
             {
-                token,
+                token = "dev-token",
                 userId = user.ID,
                 roleId = user.RoleID,
                 name = user.Name,
                 surname = user.Surname,
                 username = user.Username,
-                telephone = user.Telephone,
+                telephone = user.Phone,
                 email = user.Email
             });
         }
 
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            if (request is null || string.IsNullOrWhiteSpace(request.Email))
+            var user = new User
             {
-                return BadRequest(new { success = false, message = "Email is required." });
-            }
+                Username = request.Username,
+                PasswordHash = request.Password,
+                Email = request.Email,
+                Phone = request.Telephone,
+                Name = request.Name,
+                Surname = request.Surname,
+                RoleID = request.RoleID
+            };
 
-            var exists = await _db.Users.AnyAsync(u => u.Email == request.Email);
-            if (!exists)
-            {
-                return NotFound(new { success = false, message = "User not found." });
-            }
+            await _userRepository.CreateAsync(user);
 
-            return Ok(new { success = true, message = "Reset code sent (development stub)." });
-        }
-
-        [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
-        {
-            if (request is null ||
-                string.IsNullOrWhiteSpace(request.Email) ||
-                string.IsNullOrWhiteSpace(request.NewPassword))
-            {
-                return BadRequest(new { success = false, message = "Invalid reset request." });
-            }
-
-            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-            if (user is null)
-            {
-                return NotFound(new { success = false, message = "User not found." });
-            }
-
-            user.Password = request.NewPassword;
-            await _db.SaveChangesAsync();
-
-            return Ok(new { success = true, message = "Password reset successful." });
+            return Ok(new { message = "User created successfully" });
         }
 
         public class LoginRequest
@@ -110,19 +75,18 @@ namespace eduCareApi.Controllers
             public string LoginType { get; set; } = "username";
             public string? Username { get; set; }
             public string? Telephone { get; set; }
-            public string Password { get; set; } = string.Empty;
+            public string Password { get; set; } = "";
         }
 
-        public class ForgotPasswordRequest
+        public class RegisterRequest
         {
-            public string Email { get; set; } = string.Empty;
-        }
-
-        public class ResetPasswordRequest
-        {
-            public string Email { get; set; } = string.Empty;
-            public string? Code { get; set; }
-            public string NewPassword { get; set; } = string.Empty;
+            public string Username { get; set; } = "";
+            public string Password { get; set; } = "";
+            public string? Email { get; set; }
+            public string? Telephone { get; set; }
+            public string? Name { get; set; }
+            public string? Surname { get; set; }
+            public int RoleID { get; set; }
         }
     }
 }
