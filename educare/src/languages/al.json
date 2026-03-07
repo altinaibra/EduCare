@@ -1,0 +1,13 @@
+{
+  "login": {
+    "title": "Kyqu",
+    "subtitle": "Hyr me username ose me numer telefoni.",
+    "usernameButton": "Kyqu me Username",
+    "phoneButton": "Kyqu me Nr Telefonit",
+    "password": "Fjalkalimi",
+    "loginButton": "Kyqu",
+    "loggingIn": "Duke u kycur...",
+    "back": "Kthehu",
+    "forgotPassword": "Ke harruar fjalkalimin?"
+  }
+}

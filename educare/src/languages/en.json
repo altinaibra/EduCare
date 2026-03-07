@@ -1,0 +1,13 @@
+{
+  "login": {
+    "title": "Login",
+    "subtitle": "Login with username or phone number.",
+    "usernameButton": "Login with Username",
+    "phoneButton": "Login with Phone",
+    "password": "Password",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "back": "Back",
+    "forgotPassword": "Forgot password?"
+  }
+}

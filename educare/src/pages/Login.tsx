@@ -1,6 +1,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import { authApi, LoginType } from "../api";
 
 type LoginProps = {
@@ -15,9 +16,6 @@ type CountryCodeOption = {
 const countryCodes: CountryCodeOption[] = [
   { label: "Kosove (+383)", value: "+383" },
   { label: "Shqiperi (+355)", value: "+355" },
-  { label: "Maqedoni (+389)", value: "+389" },
-  { label: "Gjermani (+49)", value: "+49" },
-  { label: "Zvicerr (+41)", value: "+41" },
 ];
 
 const formatPhone = (rawValue: string) => {
@@ -31,6 +29,8 @@ const formatPhone = (rawValue: string) => {
 
 const Login = ({ onLoginSuccess }: LoginProps) => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
   const [loginType, setLoginType] = useState<LoginType | null>(null);
   const [username, setUsername] = useState("");
   const [countryCode, setCountryCode] = useState(countryCodes[0].value);
@@ -39,10 +39,11 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [languageDropdown, setLanguageDropdown] = useState(false);
 
   const normalizedPhoneDigits = useMemo(
     () => telephone.replace(/\D/g, ""),
-    [telephone],
+    [telephone]
   );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -50,22 +51,22 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
     setError("");
 
     if (!loginType) {
-      setError("Zgjedh menyren e login-it.");
+      setError(t("login.errors.chooseMethod"));
       return;
     }
 
     if (!password.trim()) {
-      setError("Passwordi eshte i detyrueshem.");
+      setError(t("login.errors.passwordRequired"));
       return;
     }
 
     if (loginType === "username" && !username.trim()) {
-      setError("Username eshte i detyrueshem.");
+      setError(t("login.errors.usernameRequired"));
       return;
     }
 
     if (loginType === "telephone" && normalizedPhoneDigits.length !== 8) {
-      setError("Nr telefonit duhet te jete ne formatin 4x-xxx-xxx.");
+      setError(t("login.errors.phoneFormat"));
       return;
     }
 
@@ -89,19 +90,74 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
       onLoginSuccess(response.token);
       navigate("/", { replace: true });
     } catch (requestError) {
-      setError("Login deshtoi. Kontrollo kredencialet ose lidhjen me API.");
-      // eslint-disable-next-line no-console
+      setError(t("login.errors.failed"));
       console.error(requestError);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setLanguageDropdown(false);
+  };
+
   return (
     <div className="auth-shell">
+
+      {/* Language selector top right */}
+      <div
+        style={{
+          position: "absolute",
+          top: 20,
+          right: 20
+        }}
+      >
+        <button
+          onClick={() => setLanguageDropdown(!languageDropdown)}
+          style={{
+            cursor: "pointer",
+            border: "none",
+            background: "transparent",
+            fontWeight: 600
+          }}
+        >
+          {i18n.language.toUpperCase()} ▼
+        </button>
+
+        {languageDropdown && (
+          <div
+            style={{
+              position: "absolute",
+              top: "110%",
+              right: 0,
+              background: "#fff",
+              borderRadius: 6,
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              padding: "5px 0",
+              minWidth: 80
+            }}
+          >
+            <div
+              style={{ padding: "6px 12px", cursor: "pointer" }}
+              onClick={() => changeLanguage("al")}
+            >
+              🇦🇱 AL
+            </div>
+
+            <div
+              style={{ padding: "6px 12px", cursor: "pointer" }}
+              onClick={() => changeLanguage("en")}
+            >
+              🇬🇧 EN
+            </div>
+          </div>
+        )}
+      </div>
+
       <section className="auth-card">
-        <h1>Login</h1>
-        <p className="auth-subtitle">Hyr me username ose me numer telefoni.</p>
+        <h1>{t("login.title")}</h1>
+        <p className="auth-subtitle">{t("login.subtitle")}</p>
 
         {!loginType && (
           <div className="login-choice-grid">
@@ -110,14 +166,15 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
               className="choice-btn"
               onClick={() => setLoginType("username")}
             >
-              Login me Username
+              {t("login.usernameButton")}
             </button>
+
             <button
               type="button"
               className="choice-btn"
               onClick={() => setLoginType("telephone")}
             >
-              Login me Nr Telefonit
+              {t("login.phoneButton")}
             </button>
           </div>
         )}
@@ -126,10 +183,10 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
           <form className="auth-form" onSubmit={handleSubmit}>
             {loginType === "username" && (
               <label>
-                Username
+                {t("login.username")}
                 <input
                   type="text"
-                  placeholder="Shkruaj username"
+                  placeholder={t("login.usernamePlaceholder")}
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
                 />
@@ -139,7 +196,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
             {loginType === "telephone" && (
               <div className="phone-row">
                 <label>
-                  Country Code
+                  {t("login.countryCode")}
                   <select
                     value={countryCode}
                     onChange={(event) => setCountryCode(event.target.value)}
@@ -153,7 +210,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
                 </label>
 
                 <label>
-                  Nr Telefonit
+                  {t("login.phone")}
                   <input
                     type="text"
                     inputMode="numeric"
@@ -168,26 +225,27 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
             )}
 
             <label>
-              Password
+              {t("login.password")}
               <div className="password-wrap">
                 <input
                   type={isPasswordVisible ? "text" : "password"}
-                  placeholder="Shkruaj password"
+                  placeholder={t("login.passwordPlaceholder")}
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
+
                 <button
                   type="button"
                   className="eye-btn"
                   aria-label={
                     isPasswordVisible
-                      ? "Fsheh password-in"
-                      : "Shfaq password-in"
+                      ? t("login.hidePassword")
+                      : t("login.showPassword")
                   }
                   title={
                     isPasswordVisible
-                      ? "Fsheh password-in"
-                      : "Shfaq password-in"
+                      ? t("login.hidePassword")
+                      : t("login.showPassword")
                   }
                   onClick={() =>
                     setIsPasswordVisible((previousValue) => !previousValue)
@@ -205,7 +263,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
               className="auth-submit-btn"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Duke u kycur..." : "Login"}
+              {isSubmitting ? t("login.loggingIn") : t("login.loginButton")}
             </button>
 
             <div className="auth-actions">
@@ -214,10 +272,11 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
                 className="auth-back-btn"
                 onClick={() => setLoginType(null)}
               >
-                Back
+                {t("login.back")}
               </button>
+
               <Link to="/forgot-password" className="auth-link-btn">
-                Forgot password?
+                {t("login.forgotPassword")}
               </Link>
             </div>
           </form>
