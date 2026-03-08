@@ -24,9 +24,17 @@ yarn-error.log*
 
 # Visual Studio / .NET
 .vs/
+.vs/**
 bin/
+bin/**
 obj/
+obj/**
+eduCareApi/.vs/
+eduCareApi/.vs/**
 eduCareApi/bin/
+eduCareApi/bin/**
 eduCareApi/obj/
+eduCareApi/obj/**
 *.user
 *.suo
+*.vsidx
