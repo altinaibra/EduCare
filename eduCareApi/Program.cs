@@ -56,6 +56,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ChildrenRepository>();
 builder.Services.AddScoped<EducatorsRepository>();
 builder.Services.AddScoped<UserRepository>();
+// age group repository for age-related metadata
+builder.Services.AddScoped<AgeGroupRepository>();
 
 var app = builder.Build();
 

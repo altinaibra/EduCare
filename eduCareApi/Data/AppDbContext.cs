@@ -13,4 +13,5 @@ public class AppDbContext : DbContext
     public DbSet<Educators> Educators { get; set; }
     public DbSet<Educators> Allergy { get; set; }
     public DbSet<Educators> ChildrenEducators { get; set; }
+    public DbSet<AgeGroup> AgeGroups { get; set; }
 }

@@ -30,6 +30,15 @@ export interface ResetPasswordRequest {
   newPassword: string;
 }
 
+// age group information returned from server
+export interface AgeGroup {
+  id: number;
+  ageRange: string;
+  numberOfClasses: number;
+  educatorName: string;
+  status: boolean;
+}
+
 // Users table mapping:
 // Username -> Users.Username
 // Telephone -> Users.Telephone
@@ -56,4 +65,29 @@ export const authApi = {
     );
     return data;
   },
+
+  // age group endpoints
+  getAgeGroups: async (): Promise<AgeGroup[]> => {
+    const { data } = await axiosInstance.get<AgeGroup[]>('/agegroup');
+    return data;
+  },
+
+  getAgeGroupById: async (id: number): Promise<AgeGroup> => {
+    const { data } = await axiosInstance.get<AgeGroup>(`/agegroup/${id}`);
+    return data;
+  },
+
+  createAgeGroup: async (payload: Omit<AgeGroup, 'id'>): Promise<AgeGroup> => {
+    const { data } = await axiosInstance.post<AgeGroup>('/agegroup', payload);
+    return data;
+  },
+
+  updateAgeGroup: async (id: number, payload: Omit<AgeGroup, 'id'>): Promise<AgeGroup> => {
+    const { data } = await axiosInstance.put<AgeGroup>(`/agegroup/${id}`, payload);
+    return data;
+  },
+
+  deleteAgeGroup: async (id: number): Promise<void> => {
+    await axiosInstance.delete(`/agegroup/${id}`);
+  }
 };
