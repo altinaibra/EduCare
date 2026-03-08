@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Child } from "../types/Child";
+import { styles } from "../styles/PaymentsReportStyles";
 
 interface PaymentRecord {
   monthLabel: string;
@@ -117,13 +118,13 @@ const PaymentsReport = () => {
   const selectedPayments = selectedChild ? generatePayments(selectedChild) : [];
 
   return (
-    <section className="page-card">
-      <h2 className="page-title">Raport Pagesash</h2>
-      <p className="page-subtitle">
+    <section className={styles.pageCard}>
+      <h2 className={styles.pageTitle}>Raport Pagesash</h2>
+      <p className={styles.pageSubtitle}>
         Kerkoni femijen sipas emrit dhe hapni historikun e pagesave per cdo muaj.
       </p>
 
-      <div className="report-summary">
+      <div className={styles.reportSummary}>
         <article>
           <span>Femije</span>
           <strong>{summary.totalChildren}</strong>
@@ -138,7 +139,7 @@ const PaymentsReport = () => {
         </article>
       </div>
 
-      <div className="search-wrap">
+      <div className={styles.searchWrap}>
         <input
           type="text"
           placeholder="Kerko me emrin e femijes..."
@@ -148,14 +149,14 @@ const PaymentsReport = () => {
       </div>
 
       {reportRows.length === 0 ? (
-        <p className="empty-state">Nuk u gjet asnje femije me kete emer.</p>
+        <p className={styles.emptyState}>Nuk u gjet asnje femije me kete emer.</p>
       ) : (
-        <div className="children-grid">
+        <div className={styles.childrenGrid}>
           {reportRows.map(({ child, totalPaid, payments }) => (
             <button
               key={child.id}
               type="button"
-              className="child-card report-button"
+              className={styles.childCard}
               onClick={() => setSelectedChild(child)}
             >
               <h3>{child.fullName}</h3>
@@ -168,18 +169,18 @@ const PaymentsReport = () => {
       )}
 
       {selectedChild && (
-        <div className="modal-overlay" onClick={() => setSelectedChild(null)} aria-hidden="true">
-          <div className="payment-modal" onClick={(event) => event.stopPropagation()}>
-            <div className="modal-header">
+        <div className={styles.modalOverlay} onClick={() => setSelectedChild(null)} aria-hidden="true">
+          <div className={styles.paymentModal} onClick={(event) => event.stopPropagation()}>
+            <div className={styles.modalHeader}>
               <h3>Pagesat mujore: {selectedChild.fullName}</h3>
               <button type="button" onClick={() => setSelectedChild(null)}>
                 Mbyll
               </button>
             </div>
 
-            <div className="payment-list">
+            <div className={styles.paymentList}>
               {selectedPayments.map((payment, index) => (
-                <article key={`${payment.monthLabel}-${index}`} className="payment-item">
+                <article key={`${payment.monthLabel}-${index}`} className={styles.paymentItem}>
                   <span>{payment.monthLabel}</span>
                   <strong>{payment.amount} EUR</strong>
                   <small>Paguar me: {formatDate(payment.paidDate)}</small>

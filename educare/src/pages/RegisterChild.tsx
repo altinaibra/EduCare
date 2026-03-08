@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Child } from "../types/Child";
+import { styles } from "../styles/RegisterChildStyles";
 
 const RegisterChild = () => {
   const [child, setChild] = useState<Child>({
@@ -42,11 +43,11 @@ const RegisterChild = () => {
   };
 
   return (
-    <section className="page-card form-card">
-      <h2 className="page-title">Regjistro Femije</h2>
-      <p className="page-subtitle">Ploteso te dhenat me poshte per regjistrim te shpejte.</p>
+    <section className={styles.pageCard}>
+      <h2 className={styles.pageTitle}>Regjistro Femije</h2>
+      <p className={styles.pageSubtitle}>Ploteso te dhenat me poshte per regjistrim te shpejte.</p>
 
-      <form onSubmit={handleSubmit} className="kid-form">
+      <form onSubmit={handleSubmit} className={styles.kidForm}>
         <label htmlFor="fullName">Emri i plote</label>
         <input
           id="fullName"

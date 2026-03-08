@@ -1,0 +1,15 @@
+export const styles = {
+  pageCard: "page-card",
+  pageTitle: "page-title",
+  pageSubtitle: "page-subtitle",
+  reportSummary: "report-summary",
+  searchWrap: "search-wrap",
+  emptyState: "empty-state",
+  childrenGrid: "children-grid",
+  childCard: "child-card report-button",
+  modalOverlay: "modal-overlay",
+  paymentModal: "payment-modal",
+  modalHeader: "modal-header",
+  paymentList: "payment-list",
+  paymentItem: "payment-item",
+};

@@ -1,0 +1,17 @@
+export const styles = {
+  authShell: "auth-shell",
+  authCard: "auth-card",
+  authTitle: "",
+  authSubtitle: "",
+  authForm: "auth-form",
+  formLabel: "",
+  formInput: "",
+  passwordWrap: "password-wrap",
+  eyeButton: "eye-btn",
+  authError: "auth-error",
+  authSuccess: "auth-success",
+  authSubmitButton: "auth-submit-btn",
+  authLinkButton: "auth-link-btn",
+  authActions: "auth-actions",
+  authBackButton: "auth-back-btn",
+};

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { authApi } from "../api";
+import { styles } from "../styles/ForgotPasswordStyles";
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
@@ -82,15 +83,15 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="auth-shell">
-      <section className="auth-card">
+    <div className={styles.authShell}>
+      <section className={styles.authCard}>
         <h1>{t("auth.forgotPassword")}</h1>
-        <p className="auth-subtitle">
+        <p className={styles.authSubtitle}>
           {t("auth.enterEmailForCode")}
         </p>
 
         {!isCodeSent && (
-          <form className="auth-form" onSubmit={handleSendCode}>
+          <form className={styles.authForm} onSubmit={handleSendCode}>
             <label>
               {t("auth.email")}
               <input
@@ -101,21 +102,21 @@ const ForgotPassword = () => {
               />
             </label>
 
-            {error && <p className="auth-error">{error}</p>}
-            {message && <p className="auth-success">{message}</p>}
+            {error && <p className={styles.authError}>{error}</p>}
+            {message && <p className={styles.authSuccess}>{message}</p>}
 
-            <button type="submit" className="auth-submit-btn" disabled={isSubmitting}>
+            <button type="submit" className={styles.authSubmitButton} disabled={isSubmitting}>
               {isSubmitting ? t("auth.sending") : t("auth.sendCode")}
             </button>
 
-            <Link to="/login" className="auth-link-btn">
+            <Link to="/login" className={styles.authLinkButton}>
               {t("auth.backToLogin")}
             </Link>
           </form>
         )}
 
         {isCodeSent && (
-          <form className="auth-form" onSubmit={handleResetPassword}>
+          <form className={styles.authForm} onSubmit={handleResetPassword}>
             <label>
               {t("auth.verificationCode")}
               <input
@@ -128,7 +129,7 @@ const ForgotPassword = () => {
 
             <label>
               {t("auth.newPassword")}
-              <div className="password-wrap">
+              <div className={styles.passwordWrap}>
                 <input
                   type={isPasswordVisible ? "text" : "password"}
                   placeholder={t("auth.newPassword")}
@@ -137,7 +138,7 @@ const ForgotPassword = () => {
                 />
                 <button
                   type="button"
-                  className="eye-btn"
+                  className={styles.eyeButton}
                   aria-label={
                     isPasswordVisible
                       ? t("auth.hidePassword")
@@ -167,25 +168,25 @@ const ForgotPassword = () => {
               />
             </label>
 
-            {error && <p className="auth-error">{error}</p>}
-            {message && <p className="auth-success">{message}</p>}
+            {error && <p className={styles.authError}>{error}</p>}
+            {message && <p className={styles.authSuccess}>{message}</p>}
 
-            <button type="submit" className="auth-submit-btn" disabled={isSubmitting}>
+            <button type="submit" className={styles.authSubmitButton} disabled={isSubmitting}>
               {isSubmitting
                 ? t("auth.verifying")
                 : t("auth.verifyAndReset")}
             </button>
 
-            <div className="auth-actions">
+            <div className={styles.authActions}>
               <button
                 type="button"
-                className="auth-back-btn"
+                className={styles.authBackButton}
                 onClick={() => setIsCodeSent(false)}
               >
                 {t("common.back")}
               </button>
 
-              <Link to="/login" className="auth-link-btn">
+              <Link to="/login" className={styles.authLinkButton}>
                 {t("auth.login")}
               </Link>
             </div>

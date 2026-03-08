@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Child } from "../types/Child";
+import { styles } from "../styles/ChildrenListStyles";
 
 const ChildrenList = () => {
   const { t } = useTranslation();
@@ -12,16 +13,16 @@ const ChildrenList = () => {
   }, []);
 
   return (
-    <section className="page-card">
-      <h2 className="page-title">{t("children.title")}</h2>
-      <p className="page-subtitle">{t("children.subtitle")}</p>
+    <section className={styles.pageCard}>
+      <h2 className={styles.pageTitle}>{t("children.title")}</h2>
+      <p className={styles.pageSubtitle}>{t("children.subtitle")}</p>
 
       {children.length === 0 ? (
-        <p className="empty-state">{t("children.empty")}</p>
+        <p className={styles.emptyState}>{t("children.empty")}</p>
       ) : (
-        <div className="children-grid">
+        <div className={styles.childrenGrid}>
           {children.map((child) => (
-            <article key={child.id} className="child-card">
+            <article key={child.id} className={styles.childCard}>
               <h3>{child.fullName}</h3>
               <p>
                 {t("children.age")}: {child.age} {t("children.years")}

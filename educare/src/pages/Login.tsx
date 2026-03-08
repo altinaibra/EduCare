@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { authApi, LoginType } from "../api";
+import { styles } from "../styles/LoginStyles";
 
 type LoginProps = {
   onLoginSuccess: (token: string) => void;
@@ -103,7 +104,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
   };
 
   return (
-    <div className="auth-shell">
+    <div className={styles.authShell}>
 
       {/* Language selector top right */}
       <div
@@ -155,15 +156,15 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
         )}
       </div>
 
-      <section className="auth-card">
+      <section className={styles.authCard}>
         <h1>{t("login.title")}</h1>
-        <p className="auth-subtitle">{t("login.subtitle")}</p>
+        <p className={styles.authSubtitle}>{t("login.subtitle")}</p>
 
         {!loginType && (
-          <div className="login-choice-grid">
+          <div className={styles.loginChoiceGrid}>
             <button
               type="button"
-              className="choice-btn"
+              className={styles.choiceButton}
               onClick={() => setLoginType("username")}
             >
               {t("login.usernameButton")}
@@ -171,7 +172,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
 
             <button
               type="button"
-              className="choice-btn"
+              className={styles.choiceButton}
               onClick={() => setLoginType("telephone")}
             >
               {t("login.phoneButton")}
@@ -180,7 +181,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
         )}
 
         {loginType && (
-          <form className="auth-form" onSubmit={handleSubmit}>
+          <form className={styles.authForm} onSubmit={handleSubmit}>
             {loginType === "username" && (
               <label>
                 {t("login.username")}
@@ -194,7 +195,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
             )}
 
             {loginType === "telephone" && (
-              <div className="phone-row">
+              <div className={styles.phoneRow}>
                 <label>
                   {t("login.countryCode")}
                   <select
@@ -226,7 +227,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
 
             <label>
               {t("login.password")}
-              <div className="password-wrap">
+              <div className={styles.passwordWrap}>
                 <input
                   type={isPasswordVisible ? "text" : "password"}
                   placeholder={t("login.passwordPlaceholder")}
@@ -236,7 +237,7 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
 
                 <button
                   type="button"
-                  className="eye-btn"
+                  className={styles.eyeButton}
                   aria-label={
                     isPasswordVisible
                       ? t("login.hidePassword")
@@ -256,26 +257,26 @@ const Login = ({ onLoginSuccess }: LoginProps) => {
               </div>
             </label>
 
-            {error && <p className="auth-error">{error}</p>}
+            {error && <p className={styles.authError}>{error}</p>}
 
             <button
               type="submit"
-              className="auth-submit-btn"
+              className={styles.authSubmitButton}
               disabled={isSubmitting}
             >
               {isSubmitting ? t("login.loggingIn") : t("login.loginButton")}
             </button>
 
-            <div className="auth-actions">
+            <div className={styles.authActions}>
               <button
                 type="button"
-                className="auth-back-btn"
+                className={styles.authBackButton}
                 onClick={() => setLoginType(null)}
               >
                 {t("login.back")}
               </button>
 
-              <Link to="/forgot-password" className="auth-link-btn">
+              <Link to="/forgot-password" className={styles.authLinkButton}>
                 {t("login.forgotPassword")}
               </Link>
             </div>
