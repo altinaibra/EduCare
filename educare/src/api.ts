@@ -39,6 +39,17 @@ export interface AgeGroup {
   status: boolean;
 }
 
+// Children DTO
+export interface ChildrenDto {
+  ID: number;
+  Name: string;
+  Surname: string;
+  ParentID?: number;
+  AgeID?: number;
+  ClassID?: number;
+  Status: boolean;
+}
+
 // Users table mapping:
 // Username -> Users.Username
 // Telephone -> Users.Telephone
@@ -89,5 +100,31 @@ export const authApi = {
 
   deleteAgeGroup: async (id: number): Promise<void> => {
     await axiosInstance.delete(`/agegroup/${id}`);
+  }
+};
+
+export const childrenApi = {
+  getAll: async (): Promise<ChildrenDto[]> => {
+    const { data } = await axiosInstance.get<ChildrenDto[]>('/children');
+    return data;
+  },
+
+  getById: async (id: number): Promise<ChildrenDto> => {
+    const { data } = await axiosInstance.get<ChildrenDto>(`/children/${id}`);
+    return data;
+  },
+
+  create: async (payload: Omit<ChildrenDto, 'ID'>): Promise<ChildrenDto> => {
+    const { data } = await axiosInstance.post<ChildrenDto>('/children', payload);
+    return data;
+  },
+
+  update: async (id: number, payload: Omit<ChildrenDto, 'ID'>): Promise<ChildrenDto> => {
+    const { data } = await axiosInstance.put<ChildrenDto>(`/children/${id}`, payload);
+    return data;
+  },
+
+  delete: async (id: number): Promise<void> => {
+    await axiosInstance.delete(`/children/${id}`);
   }
 };

@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { Child } from "../types/Child";
 import { styles } from "../styles/PaymentsReportStyles";
+
+interface Child {
+  id: number;
+  fullName: string;
+  age: number;
+  parentName: string;
+}
 
 interface PaymentRecord {
   monthLabel: string;

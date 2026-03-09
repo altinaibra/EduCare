@@ -1,6 +1,9 @@
 export interface Child {
-  id: number;
-  fullName: string;
-  age: number;
-  parentName: string;
+  ID: number;
+  Name: string;
+  Surname: string;
+  ParentID?: number;
+  AgeID?: number;
+  ClassID?: number;
+  Status: boolean;
 }

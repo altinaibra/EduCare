@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Child } from "../types/Child";
+import { childrenApi, ChildrenDto } from "../api";
 import { styles } from "../styles/ChildrenListStyles";
 
 const ChildrenList = () => {
   const { t } = useTranslation();
-  const [children, setChildren] = useState<Child[]>([]);
+  const [children, setChildren] = useState<ChildrenDto[]>([]);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("children") || "[]");
-    setChildren(stored);
+    const fetchChildren = async () => {
+      try {
+        const data = await childrenApi.getAll();
+        setChildren(data);
+      } catch (error) {
+        console.error("Failed to fetch children", error);
+      }
+    };
+    fetchChildren();
   }, []);
 
   return (
@@ -22,13 +29,10 @@ const ChildrenList = () => {
       ) : (
         <div className={styles.childrenGrid}>
           {children.map((child) => (
-            <article key={child.id} className={styles.childCard}>
-              <h3>{child.fullName}</h3>
+            <article key={child.ID} className={styles.childCard}>
+              <h3>{child.Name} {child.Surname}</h3>
               <p>
-                {t("children.age")}: {child.age} {t("children.years")}
-              </p>
-              <p>
-                {t("children.parent")}: {child.parentName}
+                Status: {child.Status ? "Active" : "Inactive"}
               </p>
             </article>
           ))}

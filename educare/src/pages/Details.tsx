@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { Child } from "../types/Child";
+import { ChildrenDto } from "../api";
 import { styles } from "../styles/DetailsStyles";
-import { authApi, AgeGroup } from "../api";
+import { authApi, AgeGroup, childrenApi } from "../api";
 
 const Details = () => {
-  const [children, setChildren] = useState<Child[]>([]);
+  const [children, setChildren] = useState<ChildrenDto[]>([]);
   const [ageGroups, setAgeGroups] = useState<AgeGroup[]>([]);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("children") || "[]");
-    setChildren(stored);
+    childrenApi.getAll().then(setChildren).catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -47,8 +46,7 @@ const Details = () => {
       <div className={styles.detailGrid}>
         {ageGroups.map((group) => {
           // compute number of children in this range locally
-          const [min, max] = group.ageRange.split("-").map((s) => parseInt(s));
-          const count = children.filter(c => c.age >= min && c.age <= max).length;
+          const count = children.filter(c => c.AgeID === group.id).length;
 
           return (
             <article key={group.id} className={styles.detailItem}>

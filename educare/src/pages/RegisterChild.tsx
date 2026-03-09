@@ -1,45 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Child } from "../types/Child";
 import { styles } from "../styles/RegisterChildStyles";
+import { childrenApi, authApi, AgeGroup } from "../api";
 
 const RegisterChild = () => {
   const [child, setChild] = useState<Child>({
-    id: 0,
-    fullName: "",
-    age: 0,
-    parentName: ""
+    ID: 0,
+    Name: "",
+    Surname: "",
+    ParentID: undefined,
+    AgeID: undefined,
+    ClassID: undefined,
+    Status: true
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [ageGroups, setAgeGroups] = useState<AgeGroup[]>([]);
+
+  useEffect(() => {
+    const fetchAgeGroups = async () => {
+      try {
+        const groups = await authApi.getAgeGroups();
+        setAgeGroups(groups);
+      } catch (error) {
+        console.error("Failed to fetch age groups", error);
+      }
+    };
+    fetchAgeGroups();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
+
+    let newValue: any = value;
+    
+    if (type === "number" || name.endsWith("ID") || name === "ClassID") {
+      newValue = value === "" ? undefined : Number(value);
+    } else if (type === "checkbox") {
+      newValue = (e.target as HTMLInputElement).checked;
+    }
 
     setChild((previous) => ({
       ...previous,
-      [name]: type === "number" ? Number(value) : value
+      [name]: newValue
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const existing = JSON.parse(localStorage.getItem("children") || "[]");
-    const newChild = {
-      ...child,
-      id: Date.now(),
-      createdAt: new Date().toISOString(),
-      monthlyFee: 120
-    };
+    try {
+      await childrenApi.create({
+        Name: child.Name,
+        Surname: child.Surname,
+        ParentID: child.ParentID,
+        AgeID: child.AgeID,
+        ClassID: child.ClassID,
+        Status: child.Status
+      });
 
-    localStorage.setItem("children", JSON.stringify([...existing, newChild]));
+      alert("Femija u regjistrua me sukses.");
 
-    alert("Femija u regjistrua me sukses.");
-
-    setChild({
-      id: 0,
-      fullName: "",
-      age: 0,
-      parentName: ""
-    });
+      setChild({
+        ID: 0,
+        Name: "",
+        Surname: "",
+        ParentID: undefined,
+        AgeID: undefined,
+        ClassID: undefined,
+        Status: true
+      });
+    } catch (error) {
+      console.error("Failed to register child", error);
+      alert("Gabim gjate regjistrimit te femijes.");
+    }
   };
 
   return (
@@ -48,40 +81,74 @@ const RegisterChild = () => {
       <p className={styles.pageSubtitle}>Ploteso te dhenat me poshte per regjistrim te shpejte.</p>
 
       <form onSubmit={handleSubmit} className={styles.kidForm}>
-        <label htmlFor="fullName">Emri i plote</label>
+        <label htmlFor="name">Emri</label>
         <input
-          id="fullName"
+          id="name"
           type="text"
-          name="fullName"
-          placeholder="p.sh. Ardit Krasniqi"
-          value={child.fullName}
+          name="Name"
+          placeholder="p.sh. Ardit"
+          value={child.Name}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="age">Mosha</label>
+        <label htmlFor="surname">Mbiemri</label>
         <input
-          id="age"
+          id="surname"
+          type="text"
+          name="Surname"
+          placeholder="p.sh. Krasniqi"
+          value={child.Surname}
+          onChange={handleChange}
+          required
+        />
+
+        <label htmlFor="parentId">ID e Prindit (opsionale)</label>
+        <input
+          id="parentId"
           type="number"
-          name="age"
-          min={1}
-          max={10}
-          placeholder="p.sh. 4"
-          value={child.age || ""}
+          name="ParentID"
+          placeholder="p.sh. 1"
+          value={child.ParentID || ""}
           onChange={handleChange}
-          required
         />
 
-        <label htmlFor="parentName">Emri i prindit</label>
-        <input
-          id="parentName"
-          type="text"
-          name="parentName"
-          placeholder="p.sh. Linda Krasniqi"
-          value={child.parentName}
+        <label htmlFor="ageId">Grupi i Moshes</label>
+        <select
+          id="ageId"
+          name="AgeID"
+          value={child.AgeID?.toString() || ""}
           onChange={handleChange}
           required
+        >
+          <option value="">Zgjidh grupin e moshes</option>
+          {ageGroups.map((group) => (
+            <option key={group.id} value={group.id.toString()}>
+              {group.ageRange}
+            </option>
+          ))}
+        </select>
+
+        <label htmlFor="classId">ID e Klases (opsionale)</label>
+        <input
+          id="classId"
+          type="number"
+          name="ClassID"
+          placeholder="p.sh. 1"
+          value={child.ClassID || ""}
+          onChange={handleChange}
         />
+
+        <label htmlFor="status">
+          <input
+            id="status"
+            type="checkbox"
+            name="Status"
+            checked={child.Status}
+            onChange={handleChange}
+          />
+          Aktiv
+        </label>
 
         <button type="submit">Regjistro</button>
       </form>
