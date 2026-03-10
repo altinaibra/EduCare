@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3025A0BE-94A4-4644-BB13-4B042F14E479}|eduCareApi.csproj|c:\\users\\altin\\onedrive\\documents\\educare\\educareapi\\dto\\childrendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3025A0BE-94A4-4644-BB13-4B042F14E479}|eduCareApi.csproj|solutionrelative:dto\\childrendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3025A0BE-94A4-4644-BB13-4B042F14E479}|eduCareApi.csproj|c:\\users\\altin\\onedrive\\documents\\educare\\educareapi\\dto\\roledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3025A0BE-94A4-4644-BB13-4B042F14E479}|eduCareApi.csproj|solutionrelative:dto\\roledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3025A0BE-94A4-4644-BB13-4B042F14E479}|eduCareApi.csproj|c:\\users\\altin\\onedrive\\documents\\educare\\educareapi\\models\\agegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3025A0BE-94A4-4644-BB13-4B042F14E479}|eduCareApi.csproj|solutionrelative:models\\agegroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -54,11 +62,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 0,
+              "Title": "ChildrenDto.cs",
+              "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\DTO\\ChildrenDto.cs",
+              "RelativeDocumentMoniker": "DTO\\ChildrenDto.cs",
+              "ToolTip": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\DTO\\ChildrenDto.cs",
+              "RelativeToolTip": "DTO\\ChildrenDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T18:42:52.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RoleDto.cs",
+              "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\DTO\\RoleDto.cs",
+              "RelativeDocumentMoniker": "DTO\\RoleDto.cs",
+              "ToolTip": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\DTO\\RoleDto.cs",
+              "RelativeToolTip": "DTO\\RoleDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T18:26:55.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "20260308175839_groups.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Migrations\\20260308175839_groups.cs",
               "RelativeDocumentMoniker": "Migrations\\20260308175839_groups.cs",
@@ -70,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Educators.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Models\\Educators.cs",
               "RelativeDocumentMoniker": "Models\\Educators.cs",
@@ -82,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -94,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AgeGroupRepository.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Repositories\\AgeGroupRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\AgeGroupRepository.cs",
@@ -106,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "AgeGroupController.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Controllers\\AgeGroupController.cs",
               "RelativeDocumentMoniker": "Controllers\\AgeGroupController.cs",
@@ -118,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "20260308174607_ageGroup.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Migrations\\20260308174607_ageGroup.cs",
               "RelativeDocumentMoniker": "Migrations\\20260308174607_ageGroup.cs",
@@ -130,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AgeGroup.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Models\\AgeGroup.cs",
               "RelativeDocumentMoniker": "Models\\AgeGroup.cs",
@@ -138,12 +171,11 @@
               "RelativeToolTip": "Models\\AgeGroup.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T17:44:46.387Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-08T17:44:46.387Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "AgeGroupDto.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\DTO\\AgeGroupDto.cs",
               "RelativeDocumentMoniker": "DTO\\AgeGroupDto.cs",
@@ -155,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -167,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "20260308100607_educare.cs",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\Migrations\\20260308100607_educare.cs",
               "RelativeDocumentMoniker": "Migrations\\20260308100607_educare.cs",
@@ -179,7 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\altin\\OneDrive\\Documents\\EduCare\\eduCareApi\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
